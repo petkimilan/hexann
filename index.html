@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hexann® — Configurator Premium Fullscreen</title>
     
-    <!-- Modern, letisztult Sans-serif betűtípus (Inter) -->
+    <!-- Modern Sans-serif betűtípus (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
             theme: {
                 extend: {
                     colors: {
-                        hexannYellow: '#facc15', /* Élénk sárga kiemelés a kérés szerint */
+                        hexannYellow: '#facc15', /* Sárga kiemelés */
                         hexannYellowHover: '#eab308',
                         hexannGrayDark: '#1c1917',
                         hexannGrayMedium: '#44403c',
@@ -30,7 +30,7 @@
                         hexannBorder: '#d6d3d1'
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'], /* Nincs talpas betűtípus a kérésnek megfelelően */
+                        sans: ['Inter', 'sans-serif'], /* Nincs talpas betűtípus */
                     }
                 }
             }
@@ -53,7 +53,7 @@
             display: none;
         }
 
-        /* Elegáns lebegő panel, finom elmosódással és lágy árnyékkal */
+        /* Elegáns lebegő panel finom elmosódással */
         .glass-card-floating {
             background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(24px) saturate(120%);
@@ -61,30 +61,14 @@
             border: 1px solid rgba(255, 255, 255, 0.45);
             box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.02);
         }
-
-        /* Építészeti szürke csúszka (slider) sárga kiemeléssel */
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #facc15;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
-            transition: transform 0.1s ease;
-        }
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
     </style>
 </head>
 <body class="bg-stone-900 text-stone-800 font-sans overflow-hidden h-screen w-screen relative select-none">
 
-    <!-- FOTÓREALISZTIKUS HÁTTÉR-RÉTEG (Különválasztva a biztonságos renderelésért) -->
+    <!-- FOTÓREALISZTIKUS HÁTTÉR-RÉTEG -->
     <div id="fullscreen-bg-photo" class="absolute inset-0 w-full h-full z-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-100"></div>
 
-    <!-- Sötétítő maszk a bal oldalon, hogy a szövegek tökéletesen olvashatóak legyenek a képen -->
+    <!-- Sötétítő maszk a bal oldalon az olvashatóságért -->
     <div class="absolute inset-y-0 left-0 w-full md:w-[600px] bg-gradient-to-r from-stone-900/40 via-stone-900/10 to-transparent z-10 pointer-events-none"></div>
 
     <!-- Prémium minimalista fejléc -->
@@ -99,7 +83,7 @@
         </div>
     </header>
 
-    <!-- Lebegő interaktív kérdőív a bal oldalon -->
+    <!-- Lebegő interaktív kérdőív -->
     <main class="absolute inset-y-0 left-0 z-20 w-full md:w-[480px] lg:w-[520px] pointer-events-none flex items-center px-4 md:pl-12 pt-24 pb-8">
         
         <section class="w-full max-h-[calc(100vh-10rem)] overflow-y-auto no-scrollbar pointer-events-auto glass-card-floating rounded-[32px] p-6 md:p-8 flex flex-col justify-between">
@@ -158,93 +142,20 @@
                     </div>
                 </div>
 
-                <!-- PASUL 4: LATIME -->
-                <div class="step-pane w-full space-y-4 hidden opacity-0" data-step="4">
-                    <div class="flex justify-between items-center">
-                        <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Lățime dorită (m)</label>
-                        <span id="display-latime" class="text-xl font-bold text-stone-900 border-b-2 border-hexannYellow px-2">4.0 m</span>
-                    </div>
-                    <div class="space-y-3">
-                        <input type="range" id="input-latime" min="1.5" max="12.0" step="0.5" value="4.0"
-                               class="w-full h-1 bg-stone-300 rounded-lg appearance-none cursor-pointer accent-hexannYellow"
-                               oninput="updateDimFromSlider('latime')">
-                        <div class="flex justify-between text-[9px] text-stone-500 font-bold tracking-wider">
-                            <span>MIN: 1.5 m</span>
-                            <span>MAX: 12.0 m</span>
-                        </div>
+                <!-- PASUL 4: TIP PROIECT -->
+                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="4">
+                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Ce tip de proiect doriți să realizăm?</label>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button type="button" onclick="selectProjectType('Rezidențial la casă')" class="project-btn border border-stone-300/60 bg-white/80 px-4 py-3 text-left text-[10px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Rezidențial la casă</button>
+                        <button type="button" onclick="selectProjectType('Proiect hotelier')" class="project-btn border border-stone-300/60 bg-white/80 px-4 py-3 text-left text-[10px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Proiect hotelier</button>
+                        <button type="button" onclick="selectProjectType('Proiect terasă horeca')" class="project-btn border border-stone-300/60 bg-white/80 px-4 py-3 text-left text-[10px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Proiect terasă horeca</button>
+                        <button type="button" onclick="selectProjectType('Proiect showroom fabrică')" class="project-btn border border-stone-300/60 bg-white/80 px-4 py-3 text-left text-[10px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Proiect showroom fabrică</button>
                     </div>
                 </div>
 
-                <!-- PASUL 5: INALTIME -->
-                <div class="step-pane w-full space-y-4 hidden opacity-0" data-step="5">
-                    <div class="flex justify-between items-center">
-                        <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Înălțime standard (m)</label>
-                        <span id="display-inaltime" class="text-xl font-bold text-stone-900 border-b-2 border-hexannYellow px-2">2.5 m</span>
-                    </div>
-                    <div class="space-y-3">
-                        <input type="range" id="input-inaltime" min="2.0" max="4.5" step="0.1" value="2.5"
-                               class="w-full h-1 bg-stone-300 rounded-lg appearance-none cursor-pointer accent-hexannYellow"
-                               oninput="updateDimFromSlider('inaltime')">
-                        <div class="flex justify-between text-[9px] text-stone-500 font-bold tracking-wider">
-                            <span>MIN: 2.0 m</span>
-                            <span>MAX: 4.5 m</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PASUL 6: LUNGIME -->
-                <div class="step-pane w-full space-y-4 hidden opacity-0" data-step="6">
-                    <div class="flex justify-between items-center">
-                        <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Lungime / Proiecție (m)</label>
-                        <span id="display-lungime" class="text-xl font-bold text-stone-900 border-b-2 border-hexannYellow px-2">5.0 m</span>
-                    </div>
-                    <div class="space-y-3">
-                        <input type="range" id="input-lungime" min="1.5" max="10.0" step="0.5" value="5.0"
-                               class="w-full h-1 bg-stone-300 rounded-lg appearance-none cursor-pointer accent-hexannYellow"
-                               oninput="updateDimFromSlider('lungime')">
-                        <div class="flex justify-between text-[9px] text-stone-500 font-bold tracking-wider">
-                            <span>MIN: 1.5 m</span>
-                            <span>MAX: 10.0 m</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PASUL 7: CULOARE (Kör alakú gombok az image_f0c824.jpg alapján) -->
-                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="7">
-                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Nuanța structurii aluminiu</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button type="button" onclick="selectColor('#1c1917', 'Antracit Mat')" class="color-btn border border-stone-300/60 bg-white/80 p-2.5 rounded-xl flex items-center gap-3 hover:border-hexannYellow transition-all duration-300">
-                            <span class="w-5 h-5 rounded-full border border-stone-400 block shrink-0" style="background-color: #1c1917;"></span>
-                            <span class="text-[9px] uppercase tracking-wider text-stone-800 font-semibold">Antracit</span>
-                        </button>
-                        <button type="button" onclick="selectColor('#f5f5f4', 'Alb Pur')" class="color-btn border border-stone-300/60 bg-white/80 p-2.5 rounded-xl flex items-center gap-3 hover:border-hexannYellow transition-all duration-300">
-                            <span class="w-5 h-5 rounded-full border border-stone-400 block shrink-0" style="background-color: #f5f5f4;"></span>
-                            <span class="text-[9px] uppercase tracking-wider text-stone-800 font-semibold">Alb Pur</span>
-                        </button>
-                        <button type="button" onclick="selectColor('#44403c', 'Maro Cafe')" class="color-btn border border-stone-300/60 bg-white/80 p-2.5 rounded-xl flex items-center gap-3 hover:border-hexannYellow transition-all duration-300">
-                            <span class="w-5 h-5 rounded-full border border-stone-400 block shrink-0" style="background-color: #44403c;"></span>
-                            <span class="text-[9px] uppercase tracking-wider text-stone-800 font-semibold">Maro Cafe</span>
-                        </button>
-                        <button type="button" onclick="selectColor('#78716c', 'Gri Elegant')" class="color-btn border border-stone-300/60 bg-white/80 p-2.5 rounded-xl flex items-center gap-3 hover:border-hexannYellow transition-all duration-300">
-                            <span class="w-5 h-5 rounded-full border border-stone-400 block shrink-0" style="background-color: #78716c;"></span>
-                            <span class="text-[9px] uppercase tracking-wider text-stone-800 font-semibold">Gri Elegant</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- PASUL 8: ACTIONARE -->
-                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="8">
-                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Tipul de acționare dorit</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
-                        <button type="button" onclick="selectActionare('automata')" class="act-btn border border-stone-300/60 bg-white/80 px-2 py-2.5 text-center text-[9px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Automată</button>
-                        <button type="button" onclick="selectActionare('manuala')" class="act-btn border border-stone-300/60 bg-white/80 px-2 py-2.5 text-center text-[9px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Manuală</button>
-                        <button type="button" onclick="selectActionare('fara')" class="act-btn border border-stone-300/60 bg-white/80 px-2 py-2.5 text-center text-[9px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Fără</button>
-                    </div>
-                </div>
-
-                <!-- PASUL 9: BUGET (A kőkemény prémium szűrő) -->
-                <div class="step-pane w-full space-y-2.5 hidden opacity-0" data-step="9">
-                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Bugetul alocat acestei investiții</label>
+                <!-- PASUL 5: BUGET -->
+                <div class="step-pane w-full space-y-2.5 hidden opacity-0" data-step="5">
+                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Care este bugetul estimat pentru această investiție?</label>
                     <div class="space-y-1.5">
                         <button type="button" onclick="selectBudget('sub 2000 eur')" class="budget-btn w-full border border-red-200 bg-red-50/40 px-3 py-2.5 text-left text-[9px] uppercase tracking-wider font-semibold opacity-60 flex justify-between items-center rounded-xl text-stone-500">
                             <span>Sub 2.000 EUR (Kit de serie / Nu oferim)</span>
@@ -257,7 +168,7 @@
                         <button type="button" onclick="selectBudget('5000-10000 EUR')" class="budget-btn w-full border border-stone-300/60 bg-white/80 px-3 py-2.5 text-left text-[9px] uppercase tracking-wider font-semibold hover:border-hexannYellow transition-all duration-300 flex justify-between items-center rounded-xl text-stone-800">
                             <span>5.000 EUR — 10.000 EUR</span>
                             <i class="fa-solid fa-chevron-right text-hexannYellowHover"></i>
-                        </label>
+                        </button>
                         <button type="button" onclick="selectBudget('Peste 10000 EUR')" class="budget-btn w-full border border-stone-300/60 bg-white/80 px-3 py-2.5 text-left text-[9px] uppercase tracking-wider font-semibold hover:border-hexannYellow transition-all duration-300 flex justify-between items-center rounded-xl text-stone-800">
                             <span>Peste 10.000 EUR (Proiect Custom)</span>
                             <i class="fa-solid fa-crown text-hexannYellowHover"></i>
@@ -265,9 +176,19 @@
                     </div>
                 </div>
 
-                <!-- PASUL 10: EMAIL -->
-                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="10">
-                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Unde dorești să îzi trimitem oferta?</label>
+                <!-- PASUL 6: TIMP START -->
+                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="6">
+                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Când doriți să înceapă lucrarea?</label>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button type="button" onclick="selectTimeline('Imediat (în 30 de zile)')" class="time-btn border border-stone-300/60 bg-white/80 px-4 py-3 text-left text-[10px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Imediat (în 30 de zile)</button>
+                        <button type="button" onclick="selectTimeline('În următoarele 2-3 luni')" class="time-btn border border-stone-300/60 bg-white/80 px-4 py-3 text-left text-[10px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">În următoarele 2-3 luni</button>
+                        <button type="button" onclick="selectTimeline('Doar planific (peste 6 luni)')" class="time-btn border border-stone-300/60 bg-white/80 px-4 py-3 text-left text-[10px] uppercase tracking-wider font-bold hover:bg-yellow-50 hover:border-hexannYellow transition-all duration-300 rounded-xl text-stone-800">Doar planific (peste 6 luni)</button>
+                    </div>
+                </div>
+
+                <!-- PASUL 7: EMAIL -->
+                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="7">
+                    <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Unde dorești să îți trimitem oferta?</label>
                     <div class="relative">
                         <input type="email" id="input-email" autocomplete="email"
                                class="w-full bg-transparent border-b-2 border-stone-300 focus:border-hexannYellow py-2 text-lg font-light text-stone-900 outline-none transition-colors duration-300 placeholder:text-stone-400"
@@ -275,8 +196,8 @@
                     </div>
                 </div>
 
-                <!-- PASUL 11: TELEFON -->
-                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="11">
+                <!-- PASUL 8: TELEFON -->
+                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="8">
                     <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Numărul tău de telefon (Verificare tehnică)</label>
                     <div class="relative">
                         <input type="tel" id="input-telefon" autocomplete="tel"
@@ -285,8 +206,8 @@
                     </div>
                 </div>
 
-                <!-- PASUL 12: ORASUL -->
-                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="12">
+                <!-- PASUL 9: ORASUL -->
+                <div class="step-pane w-full space-y-3 hidden opacity-0" data-step="9">
                     <label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Orașul / Locația proiectului</label>
                     <div class="relative">
                         <input type="text" id="input-orasul" autocomplete="address-level2"
@@ -313,10 +234,10 @@
                 <div class="space-y-1">
                     <div class="flex justify-between items-center text-[8px] uppercase tracking-widest text-stone-500 font-bold">
                         <span>Configurare Proiect</span>
-                        <span id="progress-text">Pasul 1 din 12</span>
+                        <span id="progress-text">Pasul 1 din 9</span>
                     </div>
                     <div class="w-full h-[2px] bg-stone-200/60 rounded-full overflow-hidden">
-                        <div id="progress-bar" class="h-full bg-hexannYellow transition-all duration-500 ease-out" style="width: 8.33%"></div>
+                        <div id="progress-bar" class="h-full bg-hexannYellow transition-all duration-500 ease-out" style="width: 11.11%"></div>
                     </div>
                 </div>
             </div>
@@ -334,16 +255,16 @@
                 <strong id="spec-product" class="text-stone-900 font-semibold">Pergelă Bioclimatică</strong>
             </div>
             <div class="flex justify-between">
-                <span>Dimensiuni:</span>
-                <strong id="spec-dims" class="text-stone-900 font-semibold">4.0 x 2.5 x 5.0 m</strong>
+                <span>Tip Proiect:</span>
+                <strong id="spec-project" class="text-stone-900 font-semibold">—</strong>
             </div>
             <div class="flex justify-between">
-                <span>Finisaj:</span>
-                <strong id="spec-color" class="text-stone-900 font-semibold">Antracit Mat</strong>
+                <span>Buget:</span>
+                <strong id="spec-budget" class="text-stone-900 font-semibold">—</strong>
             </div>
             <div class="flex justify-between">
-                <span>Sistem:</span>
-                <strong id="spec-actionare" class="text-stone-900 font-semibold">Manual</strong>
+                <span>Start:</span>
+                <strong id="spec-start" class="text-stone-900 font-semibold">—</strong>
             </div>
         </div>
     </div>
@@ -375,40 +296,34 @@
     <!-- CONFIGURÁTOR VEZÉRLŐ LOGIKA -->
     <script>
         let currentStep = 1;
-        const totalSteps = 12;
+        const totalSteps = 9;
 
         // Form állapot és adatok tárolása
         const formData = {
             prenume: '',
             nume: '',
             produs: 'Pergola bioclimatica',
-            latime: 4.0,
-            inaltime: 2.5,
-            lungime: 5.0,
-            culoare: '#1c1917',
-            culoareNume: 'Antracit Mat',
-            actionare: 'manuala',
-            buget: '5000-10000 EUR',
+            tipProiect: '',
+            buget: '',
+            startLucrare: '',
             email: '',
             telefon: '',
             orasul: ''
         };
 
-        // Golyóálló háttér betöltő rendszer CDN tartalékkal (ha az iframe CORS miatt blokkolná a helyi fájlt)
+        // Golyóálló háttér betöltő rendszer CDN tartalékkal
         function initFullscreenBackground() {
             const bgElement = document.getElementById('fullscreen-bg-photo');
-            const primaryLocalPath = 'IMG_7406.jpg'; // Pontos helyi fájl, amit feltöltöttél
-            const fallbackPath = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80'; // Medencés luxusvilla alternatíva
+            const primaryLocalPath = 'IMG_7406.jpg'; // Pontos helyi kép
+            const fallbackPath = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80'; // Alternatív luxus villa terasz
 
             const testImg = new Image();
             testImg.src = primaryLocalPath;
 
-            // Ha a böngésző hozzáfér a helyi fájlhoz:
             testImg.onload = function() {
                 bgElement.style.backgroundImage = `url('${primaryLocalPath}')`;
             };
 
-            // Ha a CORS homokozó letiltja, a golyóálló Unsplash tartalék tölt be:
             testImg.onerror = function() {
                 bgElement.style.backgroundImage = `url('${fallbackPath}')`;
             };
@@ -428,7 +343,7 @@
                 gsap.to('#back-btn', {opacity: 1, pointerEvents: 'auto', duration: 0.2});
             }
 
-            if (currentStep === 10) {
+            if (currentStep === 7) {
                 greet.innerHTML = `Mulțumim, <span class="text-stone-900 font-bold border-b-2 border-hexannYellow">${formData.prenume}</span>!`;
                 subGreet.innerText = "Unde dorești să îți trimitem oferta personalizată?";
             }
@@ -471,7 +386,7 @@
                 }
                 formData.nume = val;
             }
-            if (currentStep === 10) {
+            if (currentStep === 7) {
                 const val = document.getElementById('input-email').value.trim();
                 if (!val || !val.includes('@')) {
                     showMsg('Te rugăm să introduci o adresă de email validă.');
@@ -479,7 +394,7 @@
                 }
                 formData.email = val;
             }
-            if (currentStep === 11) {
+            if (currentStep === 8) {
                 const val = document.getElementById('input-telefon').value.trim();
                 if (!val || val.length < 8) {
                     showMsg('Te rugăm să introduci un număr de telefon valid.');
@@ -487,7 +402,7 @@
                 }
                 formData.telefon = val;
             }
-            if (currentStep === 12) {
+            if (currentStep === 9) {
                 const val = document.getElementById('input-orasul').value.trim();
                 if (!val) {
                     showMsg('Te rugăm să introduci localitatea proiectului.');
@@ -556,31 +471,23 @@
             setTimeout(nextStep, 350);
         }
 
-        function updateDimFromSlider(dimName) {
-            const val = parseFloat(document.getElementById(`input-${dimName}`).value);
-            formData[dimName] = val;
-            document.getElementById(`display-${dimName}`).innerText = `${val.toFixed(1)} m`;
-            document.getElementById('spec-dims').innerText = `${formData.latime.toFixed(1)} x ${formData.inaltime.toFixed(1)} x ${formData.lungime.toFixed(1)} m`;
-        }
+        function selectProjectType(projectType) {
+            formData.tipProiect = projectType;
+            document.getElementById('spec-project').innerText = projectType;
 
-        function selectColor(hex, name) {
-            formData.culoare = hex;
-            formData.culoareNume = name;
-            document.getElementById('spec-color').innerText = name;
-
-            document.querySelectorAll('.color-btn').forEach(btn => {
-                btn.classList.remove('border-hexannYellow', 'ring-2', 'ring-hexannYellow/30');
+            document.querySelectorAll('.project-btn').forEach(btn => {
+                btn.classList.remove('border-hexannYellow', 'bg-yellow-50', 'text-yellow-600', 'font-bold');
             });
-            event.currentTarget.classList.add('border-hexannYellow', 'ring-2', 'ring-hexannYellow/30');
+            event.target.classList.add('border-hexannYellow', 'bg-yellow-50', 'text-yellow-600', 'font-bold');
 
             setTimeout(nextStep, 350);
         }
 
-        function selectActionare(actType) {
-            formData.actionare = actType;
-            document.getElementById('spec-actionare').innerText = actType.charAt(0).toUpperCase() + actType.slice(1);
+        function selectBudget(budValue) {
+            formData.buget = budValue;
+            document.getElementById('spec-budget').innerText = budValue;
 
-            document.querySelectorAll('.act-btn').forEach(btn => {
+            document.querySelectorAll('.budget-btn').forEach(btn => {
                 btn.classList.remove('border-hexannYellow', 'bg-yellow-50', 'text-yellow-600', 'font-bold');
             });
             event.currentTarget.classList.add('border-hexannYellow', 'bg-yellow-50', 'text-yellow-600', 'font-bold');
@@ -588,10 +495,11 @@
             setTimeout(nextStep, 350);
         }
 
-        function selectBudget(budValue) {
-            formData.buget = budValue;
+        function selectTimeline(timelineValue) {
+            formData.startLucrare = timelineValue;
+            document.getElementById('spec-start').innerText = timelineValue;
 
-            document.querySelectorAll('.budget-btn').forEach(btn => {
+            document.querySelectorAll('.time-btn').forEach(btn => {
                 btn.classList.remove('border-hexannYellow', 'bg-yellow-50', 'text-yellow-600', 'font-bold');
             });
             event.currentTarget.classList.add('border-hexannYellow', 'bg-yellow-50', 'text-yellow-600', 'font-bold');
